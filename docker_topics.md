@@ -60,9 +60,10 @@
 
 # Running a Minio Inastance in Docker Container with Volume
   - ```docker pull minio/minio```
-  - ```docker run -dt \
-    -p 9000:9000 -p 9001:9001 \
-    -v /Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/data:/mnt/data \
-    -e "MINIO_CONFIG_ENV_FILE=/Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/config.env" \
-    --name "minio" \
-    minio/minio:latest server /mnt/data --console-address ":9001"```
+  - Run a minio instance in a docker container and attach a volume to the container to store the data persistantly 
+    ```docker run -dt \
+      -p 9000:9000 -p 9001:9001 \
+      -v /Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/data:/mnt/data \
+      -e "MINIO_CONFIG_ENV_FILE=/Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/config.env" \
+      --name "minio" \
+      minio/minio:latest server /mnt/data --console-address ":9001"```
