@@ -32,11 +32,11 @@
   - Mount a host directory with a single container 
   - Mount a host directory with multiple container
 
-# Efficient Caching in Layers
+# Docker Image Layers
   - Each steps of the Docker file is called a layer. 
   - For example: ```From ubuntu``` it is a layer. ```RUN copy app /app``` this is another layer.
 
-# Docker Multi-Stage Builds
+# Docker Multi-Stage Builds and Efficient Caching
   - Docker build commands builds the whole image file at the first build and chach it.
   - From the second build if nothing changes it will build in seconds because it will take it from the cache
   - From the second build if anything changes it will start rebuild from the layer where the change happened.
