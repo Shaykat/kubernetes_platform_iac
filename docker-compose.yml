@@ -1,0 +1,39 @@
+version: '3.8'  # Specify the Compose file version
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    command: server /mnt/data --console-address ":9001"  # Command to run in container
+    ports:
+      - "9000:9000"  # MinIO server
+      - "9001:9001"  # Console UI
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    volumes:
+      - type: bind
+        source: /Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/data
+        target: /mnt/data
+      - type: bind
+        source: /Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/config.env
+        target: /etc/config.env
+    restart: unless-stopped
+  
+  postgres:
+    image: postgres
+    container_name: sh-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin       
+      POSTGRES_DB: test_database  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 20s
+      retries: 3       
+    restart: unless-stopped
