@@ -7,10 +7,10 @@
   - Docker container is a result of execution of the instructions contained in a docker image.
 
 # Running ubuntu Image in Container
-  - docker run -it ubuntu 
+  - ```docker run -it ubuntu```
 
 # Docker Logs
-  - docker logs minio
+  - ```docker logs minio```
 
 # Multiple Containers
 
@@ -48,21 +48,21 @@
   - Services
   - Port Mapping
   - Env Variables
-  - docker-compose up -d
-  - docker-compose down
-  - docker-compose stop
-  - docker-compose logs minio
-  - docker-compose logs -f minio
+  - ```docker-compose up -d```
+  - ```docker-compose down```
+  - ```docker-compose stop```
+  - ```docker-compose logs minio```
+  - ```docker-compose logs -f minio```
 
 # Running a Postgres Instance in a Docker Container
-  - docker pull postgres
-  - docker run --name sh-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres
+  - ```docker pull postgres```
+  - ```docker run --name sh-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres```
 
 # Running a Minio Inastance in Docker Container with Volume
-  - docker pull minio/minio
-  - docker run -dt \
+  - ```docker pull minio/minio```
+  - ```docker run -dt \
     -p 9000:9000 -p 9001:9001 \
     -v /Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/data:/mnt/data \
     -e "MINIO_CONFIG_ENV_FILE=/Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/config.env" \
     --name "minio" \
-    minio/minio:latest server /mnt/data --console-address ":9001" 
+    minio/minio:latest server /mnt/data --console-address ":9001"```
