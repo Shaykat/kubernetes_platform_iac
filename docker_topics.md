@@ -7,6 +7,7 @@
   - Docker container is a result of execution of the instructions contained in a docker image.
 
 # Running ubuntu Image in Container
+  - docker run -it ubuntu 
 
 # Docker Logs
   - docker logs minio
@@ -33,7 +34,7 @@
 
 # Efficient Caching in Layers
   - Each steps of the Docker file is called a layer. 
-  - For example: From ubuntu, it is a layer. RUN copy app /app. This is another layer.
+  - For example: ```From ubuntu``` it is a layer. ```RUN copy app /app``` this is another layer.
 
 # Docker Multi-Stage Builds
   - Docker build commands builds the whole image file at the first build and chach it.
