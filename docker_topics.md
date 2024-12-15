@@ -10,7 +10,7 @@
   - ```docker run -it ubuntu```
 
 # Docker Logs
-  - ```docker logs minio```
+  - ```docker logs container_name```
 
 # Multiple Containers
 
@@ -43,6 +43,24 @@
   - So we should order the layers of the docker image in such a way that 
     - It keeps the less frequently changed contents in the top layer compared to the more frequently changed
     - For example: We change the project dependency like libbraries to be installed less frequently and change the code base more frequently. So it is better to keep the installation parts at the beginging and code base copy layer more down the line.
+      - Install npm after the code base copy layer. which will allow installation of the npm after each change in code base and build of the image.
+        ```
+          FROM node
+          COPY package.json package.json
+          COPY package-lock.json package-lock.json
+          COPY index.js index.js
+          RUN npm install
+          ENTRYPOINT [ "node", "index.js" ]
+        ```
+      - Installation of npm before the code base copy layer can reduce that redundancy 
+        ```
+          FROM node
+          RUN npm install
+          COPY package.json package.json
+          COPY package-lock.json package-lock.json
+          COPY index.js index.js
+          ENTRYPOINT [ "node", "index.js" ]
+        ```
 
 # Docker Compose 
   - Services
