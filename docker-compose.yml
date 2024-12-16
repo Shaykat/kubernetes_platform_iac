@@ -1,4 +1,4 @@
-version: '3.8'  # Specify the Compose file version
+version: '3.8'
 
 services:
   minio:
@@ -15,10 +15,10 @@ services:
       retries: 3
     volumes:
       - type: bind
-        source: /Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/data
+        source: ./data
         target: /mnt/data
       - type: bind
-        source: /Users/shaykatmdabdulmutalab/Documents/Development/kubernetes_platform_iac/config.env
+        source: ./config.env
         target: /etc/config.env
     restart: unless-stopped
   
@@ -37,3 +37,20 @@ services:
       timeout: 20s
       retries: 3       
     restart: unless-stopped
+
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper_service
+    ports:
+      - "2181:2181"  
+      
+  kafka:
+    image: confluentinc/cp-kafka
+    container_name: kafka_service
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: 10.0.0.38:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.0.0.38:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
